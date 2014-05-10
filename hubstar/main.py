@@ -3,7 +3,7 @@ import sys
 import argparse
 import os
 from hubstar import Hubstar
-from exceptions import *
+import exceptions
 
 
 def main():
@@ -28,13 +28,13 @@ def main():
             Hubstar(args.owner_reposname).unstar()
         else:
             Hubstar(args.owner_reposname).star()
-    except HsErrorUnauthorized, e:
+    except exceptions.HsErrorUnauthorized, e:
         sys.stderr.write(e.args[0])
         return e.error_code
-    except HsErrorInternal, e:
+    except exceptions.HsErrorInternal, e:
         sys.stderr.write("Internal Error: %s\n" % e.args[0])
         return e.error_code
-    except HsErrorUnknownObject, e:
+    except exceptions.HsErrorUnknownObject, e:
         sys.stderr.write("Unknown Object: %s\n" % e.args[0])
         return e.error_code
     except Exception:
